@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b0b20148-d44a-41cf-b975-9b0fd2f428db" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1VVkYaE9VxP6gXGB6D5H4y2DLTW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b0b20148-d44a-41cf-b975-9b0fd2f428db" name="Default Changelist" comment="" />
+      <created>1577345697046</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1577345697046</updated>
+      <workItem from="1577345698712" duration="617000" />
+      <workItem from="1577434170498" duration="599000" />
+      <workItem from="1577689984856" duration="626000" />
+      <workItem from="1577776258492" duration="2180000" />
+      <workItem from="1577949392498" duration="25000" />
+      <workItem from="1579178850412" duration="786000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2918" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1579180388275">
+      <screen x="2224" y="16" width="1920" height="1080" />
+    </state>
+    <state x="2918" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080/2224.16.1920.1080@2224.16.1920.1080" timestamp="1579180388275" />
+    <state x="2967" y="314" width="432" height="487" key="FileChooserDialogImpl" timestamp="1577949415867">
+      <screen x="2224" y="16" width="1920" height="1080" />
+    </state>
+    <state x="2967" y="314" width="432" height="487" key="FileChooserDialogImpl/0.0.1920.1080/2224.16.1920.1080@2224.16.1920.1080" timestamp="1577949415867" />
+  </component>
+</project>
