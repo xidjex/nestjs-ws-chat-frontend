@@ -1,10 +1,30 @@
-import { takeLatest, put, race } from 'redux-saga/effects'
+import { takeLatest, put, call } from 'redux-saga/effects'
+
+// Api
+import AuthApi from '../../../api/AuthApi';
 
 // Actions
-import { login, postLoading, LoginAction, postSuccess } from './loginSlice';
+import {
+    login,
+    postLoading,
+    LoginAction,
+    postSuccess,
+    postFailed
+} from './loginSlice';
 
 function* postLogin(action: LoginAction) {
-    yield race([put(postLoading({})), put(postSuccess({ data: { data: 'lolo' } }))]);
+    const { email, password } = action.payload;
+
+    yield put(postLoading());
+
+    try {
+        const { data } = yield call(AuthApi.login, email, password);
+
+        yield put(postSuccess(data));
+    } catch (exception) {
+        yield put(postFailed(exception.message));
+    }
+
 }
 
 export function* watchLogin() {

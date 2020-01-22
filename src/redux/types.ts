@@ -5,13 +5,5 @@ export interface FailedRequestAction {
 }
 
 export interface SuccessRequestAction {
-    payload: {
-        data: any
-    }
-}
-
-export interface GenericState<T> {
-    data?: T;
-    loading?: boolean;
-    error?: string | null;
+    payload: any
 }

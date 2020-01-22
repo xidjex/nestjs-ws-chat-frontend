@@ -1,36 +1,55 @@
-import {
-    createSlice,
-    createAction,
-} from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 
 // Utils
-import makeRequestReducers, { RequestTypes } from "../../utils/makeRequestReducers";
+import {
+    toggleFailed,
+    toggleLoading,
+} from '../../utils/commonReducers';
 
-export interface LoginState {
+export type LoginState = {
+    data: any;
     error: string | null;
     loading: boolean;
 }
 
-export interface LoginAction {
-    type: string;
-    payload?: {
-        email: string;
-        password: string;
-    };
-}
-
-export interface LoginActionPayload {
+export type LoginActionPayload = {
     email: string;
     password: string;
+}
+
+export type LoginAction = {
+    type: string;
+    payload: LoginActionPayload;
+}
+
+export type SuccessLoginAction = {
+    payload: {
+        accessToken: string
+    };
 }
 
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        loading: false,
-        error: null
+        data: null,
+        error: null,
+        loading: false
     } as LoginState,
-    reducers: makeRequestReducers<LoginState>(RequestTypes.post)
+    reducers: {
+        postLoading: toggleLoading<LoginState>(),
+        postFailed: toggleFailed<LoginState>(),
+        postSuccess: (state: LoginState, action: SuccessLoginAction) => {
+            const { accessToken } = action.payload;
+
+            localStorage.setItem('jwt', accessToken);
+
+            return {
+                ...state,
+                data: { accessToken },
+                loading: false,
+            }
+        },
+    }
 });
 
 export const login = createAction<LoginActionPayload>(`${authSlice.name}/login`);
