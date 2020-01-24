@@ -1,8 +1,9 @@
-import { all, fork } from "redux-saga/effects";
+import { all, fork } from 'redux-saga/effects';
 
 // Sagas
-import { sagas as authSagas } from "./auth";
+import { authSagas } from './auth';
+import { usersSagas } from './users';
 
 export default function* rootSaga() {
-    yield all([fork(authSagas)]);
+  yield all([fork(authSagas), fork(usersSagas)]);
 }

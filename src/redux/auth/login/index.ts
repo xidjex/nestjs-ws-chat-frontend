@@ -4,10 +4,10 @@ import { fork, all } from 'redux-saga/effects';
 import loginReducer from './loginSlice';
 
 // Sagas
-import { watchLogin } from './loginSagas';
+import watchLogin from './loginSagas';
 
 export function* sagas() {
-    yield all([fork(watchLogin)]);
+  yield all([fork(watchLogin)]);
 }
 
 export const reducer = loginReducer;

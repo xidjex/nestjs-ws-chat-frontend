@@ -1,28 +1,29 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Switch } from 'react-router-dom';
+import Login from '../features/auth/Login';
 
 // Layouts
-import {AuthLayout} from "../layouts/auth/AuthLayout";
+import AuthLayout from '../layouts/auth/AuthLayout';
 
 // Components
-import { CustomRoute } from './CustomRoute';
+import CustomRoute from './CustomRoute';
 
-export const Routes = () => {
-    return (
-        <Switch>
-            <CustomRoute
-                exact
-                layout={AuthLayout}
-                path="/"
-            >
-                <div>Test</div>
-            </CustomRoute>
-            <CustomRoute
-                layout={AuthLayout}
-                path="/login"
-            >
-                <div>Login</div>
-            </CustomRoute>
-        </Switch>
-    );
-};
+const Test: FC = () => <div>Test</div>;
+
+const Routes: FC = () => (
+  <Switch>
+    <CustomRoute
+      exact
+      layout={AuthLayout}
+      renderComponent={Test}
+      path="/"
+    />
+    <CustomRoute
+      layout={AuthLayout}
+      path="/login"
+      renderComponent={Login}
+    />
+  </Switch>
+);
+
+export default Routes;
