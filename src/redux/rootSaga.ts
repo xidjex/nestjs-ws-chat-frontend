@@ -5,5 +5,5 @@ import { authSagas } from './auth';
 import { usersSagas } from './users';
 
 export default function* rootSaga() {
-  yield all([fork(authSagas), fork(usersSagas)]);
+	yield all([fork(authSagas), fork(usersSagas)]);
 }

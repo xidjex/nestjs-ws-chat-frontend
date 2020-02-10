@@ -7,7 +7,7 @@ import loginReducer from './loginSlice';
 import watchLogin from './loginSagas';
 
 export function* sagas() {
-  yield all([fork(watchLogin)]);
+	yield all([fork(watchLogin)]);
 }
 
 export const reducer = loginReducer;

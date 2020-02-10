@@ -18,14 +18,14 @@ import appTheme from './themes/appTheme';
 const theme = createMuiTheme(appTheme);
 
 const App: React.FC = () => (
-  <ThemeProvider theme={theme}>
-    <GlobalStyles />
-    <Provider store={store}>
-      <Router>
-        <Routes />
-      </Router>
-    </Provider>
-  </ThemeProvider>
+	<ThemeProvider theme={theme}>
+		<GlobalStyles />
+		<Provider store={store}>
+			<Router>
+				<Routes />
+			</Router>
+		</Provider>
+	</ThemeProvider>
 );
 
 export default App;

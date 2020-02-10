@@ -9,16 +9,16 @@ interface Props extends RouteProps {
 }
 
 const CustomRoute: FC<Props> = ({
-  layout: Layout = AppLayout,
-  renderComponent: Component,
-  ...props
+	layout: Layout = AppLayout,
+	renderComponent: Component,
+	...props
 }: Props) => (
-  <Layout>
-    <Route
-      {...props}
-      render={(componentProps: RouteComponentProps) => <Component {...componentProps} />}
-    />
-  </Layout>
+	<Layout>
+		<Route
+			{...props}
+			render={(componentProps: RouteComponentProps) => <Component {...componentProps} />}
+		/>
+	</Layout>
 );
 
 export default CustomRoute;

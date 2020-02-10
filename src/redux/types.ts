@@ -1,25 +1,25 @@
 export type TargetType = {
-    [key: string]: string,
+    [key: string]: string;
 }
 
 export type ValidationErrorType = {
-    constraints: any,
-    target: TargetType,
-    property: string,
+    constraints: any;
+    target: TargetType;
+    property: string;
 }
 
 export interface FailedRequestAction<T = string> {
     payload: {
-        error: string,
-        message: T,
-        statusCode: number,
-    },
+        error: string;
+        message: T;
+        statusCode: number;
+    };
 }
 
 export interface SuccessRequestAction {
-    payload: any,
+    payload: any;
 }
 
 export interface ValidationErrors {
-    [key: string]: string,
+    [key: string]: string;
 }

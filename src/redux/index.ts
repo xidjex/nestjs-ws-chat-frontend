@@ -9,8 +9,8 @@ import { login } from './auth/login/loginSlice';
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
-  reducer: rootReducer,
-  middleware: [...getDefaultMiddleware({ thunk: false, serializableCheck: false }), sagaMiddleware],
+	reducer: rootReducer,
+	middleware: [...getDefaultMiddleware({ thunk: false, serializableCheck: false }), sagaMiddleware],
 });
 
 sagaMiddleware.run(rootSaga);

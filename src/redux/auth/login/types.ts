@@ -19,6 +19,6 @@ export type LoginAction = {
 
 export type SuccessLoginAction = {
     payload: {
-        accessToken: string,
+        accessToken: string;
     };
 }

@@ -5,9 +5,9 @@ import { all, fork } from 'redux-saga/effects';
 import { reducer as loginReducer, sagas as loginSagas } from './login';
 
 export function* authSagas() {
-  yield all([fork(loginSagas)]);
+	yield all([fork(loginSagas)]);
 }
 
 export const reducers = combineReducers({
-  login: loginReducer,
+	login: loginReducer,
 });

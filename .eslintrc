@@ -9,6 +9,10 @@
     "@typescript-eslint"
   ],
   "rules": {
+    "indent": [2, "tab"],
+    "react/jsx-indent-props": [2, "tab"],
+    "react/jsx-indent": [2, "tab"],
+    "no-tabs": 0,
     "import/extensions": 0,
     "react/jsx-filename-extension": [
       1,
@@ -19,7 +23,10 @@
         ]
       }
     ],
-    "react/jsx-props-no-spreading": 0
+    "react/jsx-props-no-spreading": 0,
+    "object-curly-spacing": ["error", "always", {
+      "arraysInObjects": false
+    }]
   },
   "settings": {
     "import/resolver": {
@@ -28,7 +35,8 @@
           ".js",
           ".jsx",
           ".ts",
-          ".tsx"
+          ".tsx",
+          ".jpg"
         ]
       }
     }

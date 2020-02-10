@@ -4,9 +4,9 @@ import { combineReducers } from 'redux';
 import currentUserReducer from './current';
 
 export function* usersSagas() {
-  yield null;
+	yield null;
 }
 
 export const reducers = combineReducers({
-  current: currentUserReducer,
+	current: currentUserReducer,
 });
