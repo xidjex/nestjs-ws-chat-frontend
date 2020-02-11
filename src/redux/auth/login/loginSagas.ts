@@ -24,9 +24,6 @@ function* postLogin(action: LoginAction): Generator {
 		const result = yield call(AuthApi.login, email, password);
 		const { data } = result as AxiosResponse<LoginData>;
 
-		localStorage.setItem('jwt', data.accessToken);
-		localStorage.setItem('refreshToken', data.refreshToken);
-
 		yield put(postSuccess(data));
 	} catch (error) {
 		const { data } = error.response;

@@ -24,9 +24,6 @@ function* postRegister(action: RegisterAction): Generator {
 		const result = yield call(AuthApi.register, email, password, name);
 		const { data } = result as AxiosResponse<RegisterData>;
 
-		localStorage.setItem('jwt', data.accessToken);
-		localStorage.setItem('refreshToken', data.refreshToken);
-
 		yield put(postSuccess(data));
 	} catch (error) {
 		const { data } = error.response;

@@ -10,7 +10,12 @@ interface HeadersInterface {
     [key: string]: string;
 }
 
-type RequestType = 'get' | 'post' | 'delete' | 'patch';
+export enum RequestType {
+	get = 'get',
+	post = 'post',
+	delete = 'delete',
+	patch = 'patch',
+}
 
 interface DataType {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
