@@ -2,8 +2,8 @@ import { createAction, createSlice } from '@reduxjs/toolkit';
 
 // Types
 import {
-	LoginState,
-	LoginActionPayload,
+	RegisterState,
+	RegisterActionPayload,
 } from './types';
 
 // Utils
@@ -13,22 +13,23 @@ import {
 } from '../../utils/commonReducers';
 
 const initialState = {
+	data: {},
 	error: null,
 	loading: false,
 	validationErrors: {},
-} as LoginState;
+} as RegisterState;
 
 const authSlice = createSlice({
-	name: 'auth.login',
+	name: 'auth.register',
 	initialState,
 	reducers: {
-		postLoading: toggleLoading<LoginState>(),
-		postFailed: toggleFailed<LoginState>(),
-		postSuccess: toggleSuccess<LoginState>(),
+		postLoading: toggleLoading<RegisterState>(),
+		postFailed: toggleFailed<RegisterState>(),
+		postSuccess: toggleSuccess<RegisterState>(),
 	},
 });
 
-export const login = createAction<LoginActionPayload>(`${authSlice.name}/login`);
+export const register = createAction<RegisterActionPayload>(`${authSlice.name}/login`);
 
 export const {
 	postLoading,

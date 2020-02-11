@@ -1,17 +1,17 @@
 import { ValidationErrors } from '../../types';
 
-export type LoginState = {
+export type RegisterState = {
     error: string | null;
     loading: boolean;
     validationErrors: ValidationErrors;
 }
 
-export type LoginActionPayload = {
+export type RegisterActionPayload = {
     email: string;
     password: string;
 }
 
-export type LoginAction = {
+export type RegisterAction = {
     type: string;
-    payload: LoginActionPayload;
+    payload: RegisterActionPayload;
 }

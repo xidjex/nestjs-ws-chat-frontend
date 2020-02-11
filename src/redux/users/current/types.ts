@@ -1,4 +1,4 @@
-import { UserStatus } from './currentSlice';
+import UserStatus from '../userStatus';
 
 export type UserState = {
     name: string;
@@ -7,7 +7,7 @@ export type UserState = {
     email: string;
 };
 
-export type SuccessLoginWithCurrentUserAction = {
+export type SetCurrentUserAction = {
     payload: {
         user: UserState;
     };

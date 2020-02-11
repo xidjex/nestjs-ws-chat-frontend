@@ -6,4 +6,4 @@ export default interface User {
     email: string;
     isAdmin: boolean;
     status: UserStatus;
-};
+}

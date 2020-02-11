@@ -1,29 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 // Types
-import { UserState, SuccessLoginWithCurrentUserAction } from './types';
+import { UserState, SetCurrentUserAction } from './types';
 
 // Auth Actions
-import { postSuccess } from '../../auth/login/loginSlice';
+import { postSuccess as successLogin } from '../../auth/login/loginSlice';
+import { postSuccess as successRegister } from '../../auth/register/registerSlice';
 
-export enum UserStatus {
-    active,
-    banned,
-    muted
-}
+const initialState = {
+	name: '',
+	isAdmin: false,
+	status: 0,
+	email: '',
+} as UserState;
+
+const setUserReducer = (state: UserState, action: SetCurrentUserAction): UserState => {
+	const { user } = action.payload;
+
+	return { ...state, ...user };
+};
 
 const currentSlice = createSlice({
 	name: 'auth',
-	initialState: {
-		name: '',
-		isAdmin: false,
-		status: 0,
-		email: '',
-	} as UserState,
+	initialState,
 	reducers: {},
 	extraReducers: {
-		// eslint-disable-next-line max-len
-		[String(postSuccess)]: (state: UserState, action: SuccessLoginWithCurrentUserAction): UserState => action.payload.user,
+		[String(successLogin)]: setUserReducer,
+		[String(successRegister)]: setUserReducer,
 	},
 });
 
