@@ -24,7 +24,7 @@ const authSlice = createSlice({
 	reducers: {
 		postLoading: toggleLoading<LoginState>(),
 		postFailed: toggleFailed<LoginState>(),
-		postSuccess: (state: LoginState, action: SuccessLoginAction) => {
+		postSuccess: (state: LoginState, action: SuccessLoginAction): LoginState => {
 			const { accessToken } = action.payload;
 
 			return {

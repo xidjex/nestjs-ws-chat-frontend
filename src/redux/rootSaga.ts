@@ -4,6 +4,6 @@ import { all, fork } from 'redux-saga/effects';
 import { authSagas } from './auth';
 import { usersSagas } from './users';
 
-export default function* rootSaga() {
+export default function* rootSaga(): Generator {
 	yield all([fork(authSagas), fork(usersSagas)]);
 }

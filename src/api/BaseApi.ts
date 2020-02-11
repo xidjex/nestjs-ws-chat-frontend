@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosPromise } from 'axios';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_HOST;
 
@@ -12,11 +12,16 @@ interface HeadersInterface {
 
 type RequestType = 'get' | 'post' | 'delete' | 'patch';
 
+interface DataType {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	[key: string]: any;
+}
+
 interface RequestParamsInterface {
     url: string;
     type?: RequestType;
     params?: ParamsInterface;
-    data?: any;
+    data?: DataType;
     headers?: HeadersInterface;
 }
 
@@ -35,13 +40,13 @@ export default class BaseApi {
 		};
 	}
 
-	getUrl(uri = '') {
+	getUrl(uri = ''): string {
 		const divider = '?/'.includes(uri[0]) || !uri ? '' : '/';
 
 		return `${this.baseUrl}${divider}${uri}`;
 	}
 
-	request(params: RequestParamsInterface): Promise<any> {
+	request(params: RequestParamsInterface): AxiosPromise {
 		return axios.request({
 			...params,
 			url: this.getUrl(params.url),

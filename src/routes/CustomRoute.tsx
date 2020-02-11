@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FunctionComponent, ReactElement } from 'react';
 import { Route, RouteComponentProps, RouteProps } from 'react-router-dom';
 import AppLayout from '../layouts/app/AppLayout';
 
@@ -8,7 +8,7 @@ interface Props extends RouteProps {
     protected?: boolean;
 }
 
-const CustomRoute: FC<Props> = ({
+const CustomRoute: FunctionComponent<Props> = ({
 	layout: Layout = AppLayout,
 	renderComponent: Component,
 	...props
@@ -16,7 +16,9 @@ const CustomRoute: FC<Props> = ({
 	<Layout>
 		<Route
 			{...props}
-			render={(componentProps: RouteComponentProps) => <Component {...componentProps} />}
+			render={
+				(componentProps: RouteComponentProps): ReactElement => <Component {...componentProps} />
+			}
 		/>
 	</Layout>
 );

@@ -6,7 +6,7 @@ import loginReducer from './loginSlice';
 // Sagas
 import watchLogin from './loginSagas';
 
-export function* sagas() {
+export function* sagas(): Generator {
 	yield all([fork(watchLogin)]);
 }
 

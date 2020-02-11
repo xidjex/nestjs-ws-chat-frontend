@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 // Reducers
 import currentUserReducer from './current';
 
-export function* usersSagas() {
+export function* usersSagas(): Generator {
 	yield null;
 }
 

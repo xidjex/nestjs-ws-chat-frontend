@@ -23,7 +23,7 @@ const currentSlice = createSlice({
 	reducers: {},
 	extraReducers: {
 		// eslint-disable-next-line max-len
-		[String(postSuccess)]: (state: UserState, action: SuccessLoginWithCurrentUserAction) => action.payload.user,
+		[String(postSuccess)]: (state: UserState, action: SuccessLoginWithCurrentUserAction): UserState => action.payload.user,
 	},
 });
 
