@@ -13,10 +13,8 @@ import {
 } from '../../utils/commonReducers';
 
 const initialState = {
-	data: {},
 	error: null,
 	loading: false,
-	validationErrors: {},
 } as RegisterState;
 
 const authSlice = createSlice({
@@ -29,7 +27,7 @@ const authSlice = createSlice({
 	},
 });
 
-export const register = createAction<RegisterActionPayload>(`${authSlice.name}/login`);
+export const register = createAction<RegisterActionPayload>(`${authSlice.name}/register`);
 
 export const {
 	postLoading,

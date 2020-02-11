@@ -16,12 +16,12 @@ import {
 } from './registerSlice';
 
 function* postRegister(action: RegisterAction): Generator {
-	const { email, password } = action.payload;
+	const { email, password, name } = action.payload;
 
 	yield put(postLoading());
 
 	try {
-		const result = yield call(AuthApi.login, email, password);
+		const result = yield call(AuthApi.register, email, password, name);
 		const { data } = result as AxiosResponse<RegisterData>;
 
 		localStorage.setItem('jwt', data.accessToken);
@@ -35,6 +35,6 @@ function* postRegister(action: RegisterAction): Generator {
 	}
 }
 
-export default function* watchLogin(): Generator {
+export default function* watchRegister(): Generator {
 	yield takeLatest(register, postRegister);
 }

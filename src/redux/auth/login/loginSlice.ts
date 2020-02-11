@@ -15,7 +15,6 @@ import {
 const initialState = {
 	error: null,
 	loading: false,
-	validationErrors: {},
 } as LoginState;
 
 const authSlice = createSlice({

@@ -9,6 +9,7 @@ export type RegisterState = {
 export type RegisterActionPayload = {
     email: string;
     password: string;
+    name: string;
 }
 
 export type RegisterAction = {

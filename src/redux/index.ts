@@ -4,7 +4,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
 
-import { login } from './auth/login/loginSlice';
+import { register } from './auth/register/registerSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -15,7 +15,7 @@ const store = configureStore({
 
 sagaMiddleware.run(rootSaga);
 
-setTimeout(() => store.dispatch(login({ email: 'mail@mail.com', password: 'q1w2e3r4' })), 1000);
+setTimeout(() => store.dispatch(register({ email: 'masdsdddidfl@mail.com', password: 'q1w2e3r4', name: 'sdsddfsdsd' })), 1000);
 
 export type AppDispatch = typeof store.dispatch
 
