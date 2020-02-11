@@ -2,27 +2,27 @@ import { AxiosResponse } from 'axios';
 import { takeLatest, put, call } from 'redux-saga/effects';
 
 // Api
-import AuthApi, { LoginData } from '../../../api/AuthApi';
+import AuthApi, { RegisterData } from '../../../api/AuthApi';
 
 // Types
-import { LoginAction } from './types';
+import { RegisterAction } from './types';
 
 // Actions
 import {
-	login,
+	register,
 	postLoading,
 	postSuccess,
 	postFailed,
-} from './loginSlice';
+} from './registerSlice';
 
-function* postLogin(action: LoginAction): Generator {
+function* postRegister(action: RegisterAction): Generator {
 	const { email, password } = action.payload;
 
 	yield put(postLoading());
 
 	try {
 		const result = yield call(AuthApi.login, email, password);
-		const { data } = result as AxiosResponse<LoginData>;
+		const { data } = result as AxiosResponse<RegisterData>;
 
 		localStorage.setItem('jwt', data.accessToken);
 		localStorage.setItem('refreshToken', data.refreshToken);
@@ -36,5 +36,5 @@ function* postLogin(action: LoginAction): Generator {
 }
 
 export default function* watchLogin(): Generator {
-	yield takeLatest(login, postLogin);
+	yield takeLatest(register, postRegister);
 }
