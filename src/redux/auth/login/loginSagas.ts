@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { takeLatest, put, call } from 'redux-saga/effects';
 
 // Api
-import AuthApi, { LoginResponse } from '../../../api/AuthApi';
+import AuthApi, { LoginData } from '../../../api/AuthApi';
 
 // Types
 import { LoginAction } from './types';
@@ -22,7 +22,7 @@ function* postLogin(action: LoginAction): Generator {
 
 	try {
 		const result = yield call(AuthApi.login, email, password);
-		const { data } = result as AxiosResponse<LoginResponse>;
+		const { data } = result as AxiosResponse<LoginData>;
 
 		localStorage.setItem('jwt', data.accessToken);
 		localStorage.setItem('refreshToken', data.refreshToken);

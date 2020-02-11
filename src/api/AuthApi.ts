@@ -8,7 +8,7 @@ class AuthApi extends BaseApi {
 	login = (
 		email: string,
 		password: string,
-	): Promise<AxiosResponse<LoginResponse>> => this.request({
+	): Promise<AxiosResponse<LoginData>> => this.request({
 		type: 'post',
 		url: 'login',
 		data: { email, password },
@@ -18,20 +18,20 @@ class AuthApi extends BaseApi {
 		email: string,
 		password: string,
 		name: string,
-	): Promise<AxiosResponse<RegisterResponse>> => this.request({
+	): Promise<AxiosResponse<RegisterData>> => this.request({
 		type: 'post',
 		url: 'register',
 		data: { email, password, name },
 	})
 }
 
-export type LoginResponse = {
+export type LoginData = {
 	accessToken: string;
 	refreshToken: string;
 	user: User;
 }
 
-export type RegisterResponse = {
+export type RegisterData = {
 	accessToken: string;
 	refreshToken: string;
 	user: User;
