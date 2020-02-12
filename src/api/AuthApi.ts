@@ -1,7 +1,9 @@
 import { AxiosResponse } from 'axios';
+
+import BaseApi, { RequestType } from './BaseApi';
+
 // Types
 import User from '../types/User';
-import BaseApi, { RequestType } from './BaseApi';
 
 class AuthApi extends BaseApi {
 	login = (
@@ -35,6 +37,7 @@ class AuthApi extends BaseApi {
 	});
 }
 
+// Types
 export type LoginData = {
 	accessToken: string;
 	refreshToken: string;
@@ -53,6 +56,8 @@ export type RefreshTokenData = {
 	user: User;
 }
 
-export type CheckTokenData = undefined;
+export type CheckTokenData = {
+	user: User;
+}
 
 export default new AuthApi('/auth');
