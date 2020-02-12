@@ -1,8 +1,16 @@
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
+// Actions
+import { login } from '../../redux/auth/login/loginSlice';
+
+// Types
+import { LoginState } from '../../redux/auth/login/types';
+import { RootState } from '../../redux/rootReducer';
 
 interface FormData {
 	password: string;
@@ -10,20 +18,27 @@ interface FormData {
 }
 
 const Login: FC = () => {
+	// State
+	const {
+		error,
+	} = useSelector<RootState>(({ auth }) => auth.login) as LoginState;
+
+	const dispatch = useDispatch();
+
+	// Form data
 	const { register, handleSubmit } = useForm<FormData>({
 		mode: 'onSubmit',
-		defaultValues: {
-			password: 'password',
-			email: 'email@mail.com',
-		},
 	});
 
 	const onSubmit = handleSubmit((data) => {
-		// console.log(data);
+		dispatch(login(data));
 	});
 
 	return (
 		<form onSubmit={onSubmit}>
+			{
+				error && (<div>{error}</div>)
+			}
 			<TextField
 				variant="outlined"
 				margin="normal"
