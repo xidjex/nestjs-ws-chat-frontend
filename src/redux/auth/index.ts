@@ -5,7 +5,7 @@ import { all, fork } from 'redux-saga/effects';
 import { reducer as loginReducer, sagas as loginSagas } from './login';
 import { reducer as registerReducer, sagas as registerSagas } from './register';
 
-export function* authSagas(): Generator {
+export function* sagas(): Generator {
 	yield all([
 		fork(loginSagas),
 		fork(registerSagas),

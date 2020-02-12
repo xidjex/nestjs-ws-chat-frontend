@@ -1,9 +1,12 @@
 import { all, fork } from 'redux-saga/effects';
 
 // Sagas
-import { authSagas } from './auth';
-import { usersSagas } from './users';
+import { sagas as authSagas } from './auth';
+import { sagas as usersSagas } from './users';
 
 export default function* rootSaga(): Generator {
-	yield all([fork(authSagas), fork(usersSagas)]);
+	yield all([
+		fork(authSagas),
+		fork(usersSagas),
+	]);
 }

@@ -1,3 +1,5 @@
+import { Action } from 'redux';
+
 export type TargetType = {
     [key: string]: string;
 }
@@ -22,4 +24,14 @@ export interface SuccessRequestAction {
 
 export interface ValidationErrors {
     [key: string]: string;
+}
+
+export interface ReduxAction<T> extends Action<string> {
+    payload: T;
+}
+
+export interface DefaultState {
+    data: any;
+    validationErrors: ValidationErrors;
+    loading?: boolean;
 }

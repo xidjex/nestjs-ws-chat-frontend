@@ -1,6 +1,10 @@
-import { ValidationErrors } from '../../types';
+import {
+	DefaultState,
+	ReduxAction,
+	ValidationErrors,
+} from '../../types';
 
-export type LoginState = {
+export interface LoginState extends DefaultState {
     error: string | null;
     loading: boolean;
     validationErrors: ValidationErrors;
@@ -11,7 +15,4 @@ export type LoginActionPayload = {
     password: string;
 }
 
-export type LoginAction = {
-    type: string;
-    payload: LoginActionPayload;
-}
+export type LoginAction = ReduxAction<LoginActionPayload>

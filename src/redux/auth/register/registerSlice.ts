@@ -9,7 +9,8 @@ import {
 // Utils
 import {
 	toggleFailed,
-	toggleLoading, toggleSuccess,
+	toggleLoading,
+	toggleSuccess,
 } from '../../utils/commonReducers';
 
 const initialState = {

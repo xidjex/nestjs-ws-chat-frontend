@@ -3,6 +3,7 @@ import {
 	SuccessRequestAction,
 	ValidationErrors,
 	ValidationErrorType,
+	DefaultState,
 } from '../types';
 
 export function toggleLoading<State>() {
@@ -40,10 +41,13 @@ export function toggleFailed<State>() {
 	};
 }
 
-export function toggleSuccess<State>() {
+export function toggleSuccess<State extends DefaultState>() {
 	return (state: State, action: SuccessRequestAction): State => ({
 		...state,
-		data: action.payload,
+		data: {
+			...state.data,
+			...action.payload,
+		},
 		error: null,
 		validationErrors: {},
 		loading: false,
