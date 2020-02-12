@@ -4,17 +4,47 @@ import {
 	put,
 	call,
 	delay,
+	all,
 } from 'redux-saga/effects';
 
 // Api
-import AuthApi, { RefreshTokenData } from '../../../api/AuthApi';
+import AuthApi, { RefreshTokenData, CheckTokenData } from '../../../api/AuthApi';
+
+// Actions
 import { postSuccess as successLogin } from '../../auth/login/loginSlice';
 import { postSuccess as successRegister } from '../../auth/register/registerSlice';
+import {
+	successRefreshToken,
+	refreshTokens as refreshTokensAction,
+	checkToken as checkTokenAction,
+	postFailed,
+	setAuthorized,
+	successCheckToken,
+} from './currentSlice';
 
 // Types
 import { SuccessUserAuthAction } from './types';
-import { successRefresh, refreshTokens as refreshTokensAction, postFailed } from './currentSlice';
+
+// Utils
 import getTokenExpirationDate from './utils';
+
+function* manageTokens(action: SuccessUserAuthAction): Generator {
+	const { accessToken, refreshToken } = action.payload;
+
+	localStorage.setItem('jwt', accessToken);
+	localStorage.setItem('refreshToken', refreshToken);
+
+	yield runRefreshTokenTask(accessToken);
+}
+
+function* runRefreshTokenTask(accessToken: string): Generator {
+	const accessTokenExpDate = +(getTokenExpirationDate(accessToken));
+	const currentDate = +(new Date());
+
+	yield delay(accessTokenExpDate - currentDate);
+
+	yield refreshTokens();
+}
 
 function* refreshTokens(): Generator {
 	try {
@@ -23,30 +53,36 @@ function* refreshTokens(): Generator {
 		const result = yield call(AuthApi.refreshToken, refreshToken);
 		const { data } = result as AxiosResponse<RefreshTokenData>;
 
-		yield put(successRefresh(data));
+		yield put(successRefreshToken(data));
 	} catch (error) {
 		const { data } = error.response;
 
 		yield put(postFailed(data));
+		yield put(setAuthorized(false));
 	}
 }
 
-function* manageTokens(action: SuccessUserAuthAction): Generator {
-	const { accessToken, refreshToken } = action.payload;
+function* checkToken(): Generator {
+	try {
+		const result = yield call(AuthApi.checkToken);
+		const { data } = result as AxiosResponse<CheckTokenData>;
 
-	localStorage.setItem('jwt', accessToken);
-	localStorage.setItem('refreshToken', refreshToken);
+		yield put(successCheckToken(data));
 
-	const accessTokenExpDate = +(getTokenExpirationDate(accessToken));
-	const currentDate = +(new Date());
+		const accessToken = String(localStorage.getItem('jwt'));
 
-	yield delay(accessTokenExpDate - currentDate);
-	yield put(refreshTokensAction());
+		yield runRefreshTokenTask(accessToken);
+	} catch (error) {
+		yield refreshTokens();
+	}
 }
 
 export default function* watchTokens(): Generator {
-	yield takeLatest(successLogin, manageTokens);
-	yield takeLatest(successRegister, manageTokens);
-	yield takeLatest(successRefresh, manageTokens);
-	yield takeLatest(refreshTokensAction, refreshTokens);
+	yield all([
+		takeLatest(successLogin, manageTokens),
+		takeLatest(successRegister, manageTokens),
+		takeLatest(successRefreshToken, manageTokens),
+		takeLatest(refreshTokensAction, refreshTokens),
+		takeLatest(checkTokenAction, checkToken),
+	]);
 }

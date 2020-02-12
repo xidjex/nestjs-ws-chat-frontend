@@ -1,7 +1,4 @@
-type TokenPayload = {
-	exp: number;
-	iat: number;
-}
+import { TokenPayload } from './types';
 
 const getTokenExpirationDate = (token: string): Date => {
 	const [, payload] = token.split('.');

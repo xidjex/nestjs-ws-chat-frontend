@@ -1,9 +1,15 @@
-import { createAction, createSlice } from '@reduxjs/toolkit';
-import { LoginState } from '../../auth/login/types';
-import { toggleFailed, toggleLoading, toggleSuccess } from '../../utils/commonReducers';
+import { createSlice } from '@reduxjs/toolkit';
+import { ReduxAction } from '../../types';
 
 // Types
-import { UserState, SetCurrentUserAction, SuccessUserAuthActionPayload } from './types';
+import { UserState, SetCurrentUserAction } from './types';
+
+// Utils
+import {
+	toggleFailed,
+	toggleLoading,
+	toggleSuccess,
+} from '../../utils/commonReducers';
 
 // Auth Actions
 import { postSuccess as successLogin } from '../../auth/login/loginSlice';
@@ -20,7 +26,7 @@ const initialState = {
 	loading: true,
 } as UserState;
 
-const setUserReducer = (state: UserState, action: SetCurrentUserAction): UserState => {
+const setUserReducer = (state: UserState, action: ReduxAction<SetCurrentUserAction>): UserState => {
 	const { user } = action.payload;
 
 	return {
@@ -34,27 +40,39 @@ const setUserReducer = (state: UserState, action: SetCurrentUserAction): UserSta
 	};
 };
 
-export const successRefresh = createAction<SuccessUserAuthActionPayload>(`${createAction.name}/successRefresh`);
-
 export const currentSlice = createSlice({
 	name: 'auth',
 	initialState,
 	reducers: {
 		refreshTokens: toggleLoading<UserState>(),
+		successRefreshToken: setUserReducer,
+
 		checkToken: toggleLoading<UserState>(),
+		successCheckToken: setUserReducer,
+
 		postFailed: toggleFailed<UserState>(),
 		postSuccess: toggleSuccess<UserState>(),
+
+		setAuthorized: (state: UserState, action: ReduxAction<boolean>): UserState => ({
+			...state,
+			data: {
+				...state.data,
+				authorized: action.payload,
+			},
+		}),
 	},
 	extraReducers: {
 		[String(successLogin)]: setUserReducer,
 		[String(successRegister)]: setUserReducer,
-		[String(successRefresh)]: setUserReducer,
 	},
 });
 
 export const {
 	refreshTokens,
 	checkToken,
+	setAuthorized,
+	successCheckToken,
+	successRefreshToken,
 	postFailed,
 } = currentSlice.actions;
 

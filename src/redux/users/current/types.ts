@@ -1,23 +1,17 @@
-import UserStatus from '../userStatus';
+import { DefaultState, ReduxAction } from '../../types';
 import User from '../../../types/User';
 
-type UserData = {
-    name: string;
-    isAdmin: boolean;
-    status: UserStatus;
-    email: string;
+interface UserData extends User {
     authorized: boolean;
 }
 
-export type UserState = {
+export interface UserState extends DefaultState {
     data: UserData;
     loading: boolean;
-};
+}
 
 export type SetCurrentUserAction = {
-    payload: {
-        user: UserState;
-    };
+    user: User;
 }
 
 export type SuccessUserAuthActionPayload = {
@@ -26,12 +20,9 @@ export type SuccessUserAuthActionPayload = {
     user: User;
 }
 
-export type SuccessUserAuthAction = {
-    type: string;
-    payload: SuccessUserAuthActionPayload;
+export type TokenPayload = {
+    exp: number;
+    iat: number;
 }
 
-export type SuccessRefreshAction = {
-    type: string;
-    payload: SuccessUserAuthActionPayload;
-}
+export type SuccessUserAuthAction = ReduxAction<SuccessUserAuthActionPayload>;
