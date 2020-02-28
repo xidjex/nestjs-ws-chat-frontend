@@ -8,7 +8,7 @@ import {
 import AppLayout from '../layouts/app/AppLayout';
 
 export interface Props extends RouteProps {
-    layout: React.ElementType;
+    layout?: React.ElementType;
     renderComponent: React.ElementType;
 }
 

@@ -1,18 +1,22 @@
-import React, { FC } from 'react';
-import { Switch } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import React, { FC, ReactElement } from 'react';
+import { Switch, Route as DefaultRoute, Link } from 'react-router-dom';
 
-// Layouts
+// Pages
 import AuthLayout from '../layouts/auth/AuthLayout';
-
-// Features
-import Login from '../features/auth/Login';
+import Login from '../pages/auth/Login';
 import PrivateRoute from './PrivateRoute';
 
 // Components
-import Route from './Route';
 import useRedirectAuthenticated from './useRedirectAuthenticated';
+import Route from './Route';
 
-const Test: FC = () => (<div>Test</div>);
+const Test: FC = () => (
+	<div>
+Test
+		<Link to="/">Link</Link>
+	</div>
+);
 
 export const routes = {
 	login: '/login',
@@ -23,19 +27,24 @@ const Routes: FC = () => {
 	useRedirectAuthenticated(routes.home);
 
 	return (
-		<Switch>
-			<PrivateRoute
-				exact
-				layout={AuthLayout}
-				renderComponent={Test}
-				path={routes.home}
-			/>
-			<Route
-				layout={AuthLayout}
-				path={routes.home}
-				renderComponent={Login}
-			/>
-		</Switch>
+		<DefaultRoute
+			render={({ location }): ReactElement => (
+				<AnimatePresence exitBeforeEnter initial={false}>
+					<Switch location={location} key={location.pathname}>
+						<PrivateRoute
+							exact
+							renderComponent={Test}
+							path={routes.home}
+						/>
+						<Route
+							layout={AuthLayout}
+							path={routes.login}
+							renderComponent={Login}
+						/>
+					</Switch>
+				</AnimatePresence>
+			)}
+		/>
 	);
 };
 

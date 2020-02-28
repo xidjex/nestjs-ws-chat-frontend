@@ -1,23 +1,27 @@
-import { ReactElement } from 'react';
-import styled from 'styled-components';
+import React, { FC } from 'react';
 
 // Background image
 import background from '../../assets/background.jpg';
+// Components
+import Navigation from '../../components/navigation/Navigation';
 
-interface Props {
-    children: ReactElement;
-}
+// Navigation
+import {
+	AuthLayout as AuthLayoutWrapper,
+	SidebarContainer,
+} from './styles';
 
-const AuthLayout = styled.div<Props>`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    width: 100%;
-    height: 100%;
-    
-    background-size: cover;
-    background-image: url(${background});
-`;
+import { LayoutProps } from '../types';
+
+const AuthLayout: FC<LayoutProps> = ({ children }: LayoutProps) => (
+	<AuthLayoutWrapper background={background}>
+		<SidebarContainer>
+			<Navigation>
+				{children}
+			</Navigation>
+		</SidebarContainer>
+		<div />
+	</AuthLayoutWrapper>
+);
 
 export default AuthLayout;
