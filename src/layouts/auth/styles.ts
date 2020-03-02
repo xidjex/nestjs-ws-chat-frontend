@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { SidebarContainer as AppSidebarContainer } from '../app/styles';
+
+// Styles
+import { NavigationContainer as AppNavigationContainer } from '../app/styles';
 
 interface Props {
   background: string;
@@ -18,17 +20,11 @@ const AuthLayout = styled.div`
     background-image: url(${({ background }: Props): string => background});
 `;
 
-const SidebarContainer = styled(AppSidebarContainer)`
+const NavigationContainer = styled(AppNavigationContainer)`
 		max-width: 50%;
-		> div {
-			max-width: 100%;
-		}
 `;
-
-const Content = styled.div``;
 
 export {
 	AuthLayout,
-	Content,
-	SidebarContainer,
+	NavigationContainer,
 };

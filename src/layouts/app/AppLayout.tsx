@@ -4,21 +4,24 @@ import React, { FC } from 'react';
 import background from '../../assets/background.jpg';
 
 // Components
-import Navigation from '../../components/navigation/Navigation';
+import { Content, Navigation } from '../../components';
 
-// Navigation
+// Styles
 import {
 	AppLayout as AppLayoutWrapper,
-	Content,
+	NavigationContainer,
 } from './styles';
 
+// Types
 import { LayoutProps } from '../types';
 
 const AppLayout: FC<LayoutProps> = ({ children }: LayoutProps) => (
 	<AppLayoutWrapper background={background}>
-		<Navigation>
-			<div>App</div>
-		</Navigation>
+		<NavigationContainer>
+			<Navigation>
+				<div>App</div>
+			</Navigation>
+		</NavigationContainer>
 		<Content>
 			{children}
 		</Content>

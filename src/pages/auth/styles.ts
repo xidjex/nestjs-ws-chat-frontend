@@ -10,6 +10,7 @@ const Form = styled.form`
   top: 30%;
   
   width: 100%;
+  max-width: 600px;
 `;
 
 export default Form;

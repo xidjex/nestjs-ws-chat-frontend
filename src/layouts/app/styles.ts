@@ -17,7 +17,7 @@ const AppLayout = styled.div`
     background-image: url(${({ background }: Props): string => background});
 `;
 
-const SidebarContainer = styled.div`
+const NavigationContainer = styled.div`
 		position: relative;
 		width: 100%;
 		height: 100%;
@@ -30,5 +30,5 @@ const Content = styled.div``;
 export {
 	AppLayout,
 	Content,
-	SidebarContainer,
+	NavigationContainer,
 };

@@ -22,7 +22,7 @@ const Route: FunctionComponent<Props> = ({
 	);
 
 	return (
-		<Layout>
+		<Layout {...props}>
 			<ReactRouterRoute {...props} render={routeRender} />
 		</Layout>
 	);

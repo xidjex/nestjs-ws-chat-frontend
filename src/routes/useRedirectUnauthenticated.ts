@@ -7,7 +7,7 @@ import { UserState } from '../redux/users/current/types';
 
 import { routes } from './Routes';
 
-const useRedirectUnauthenticated = (path = '/login'): void => {
+const useRedirectUnauthenticated = (path = routes.login): void => {
 	const {
 		data: { authorized },
 	} = useSelector<RootState>(({ users }) => users.current) as UserState;
@@ -16,7 +16,7 @@ const useRedirectUnauthenticated = (path = '/login'): void => {
 
 	const history = useHistory();
 
-	const isShouldRedirect = !authorized && pathname !== routes.login;
+	const isShouldRedirect = !authorized && pathname !== path;
 
 	if (isShouldRedirect) {
 		history.push(path);
