@@ -28,6 +28,8 @@ function* postLogin(action: LoginAction): Generator {
 	} catch (error) {
 		const { data } = error.response;
 
+		console.log(data);
+
 		yield put(postFailed(data));
 	}
 }

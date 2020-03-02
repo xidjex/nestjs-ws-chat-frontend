@@ -22,6 +22,7 @@
     "axios": "^0.19.1",
     "browser-history": "^1.0.1",
     "framer-motion": "^1.8.4",
+    "md5": "^2.2.1",
     "qs": "^6.9.1",
     "react": "^16.12.0",
     "react-app-rewire-styled-components": "^3.0.2",

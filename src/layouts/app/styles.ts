@@ -21,14 +21,20 @@ const NavigationContainer = styled.div`
 		position: relative;
 		width: 100%;
 		height: 100%;
-		max-width: 400px;
+		max-width: 300px;
 		flex-grow: 1;
 `;
 
-const Content = styled.div``;
+const CurrentUserCard = styled.div`
+		width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+`;
 
 export {
 	AppLayout,
-	Content,
+	CurrentUserCard,
 	NavigationContainer,
 };
