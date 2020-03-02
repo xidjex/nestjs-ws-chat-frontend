@@ -8,6 +8,7 @@ import {
 
 // Pages
 import Login from '../pages/auth/Login';
+import Register from '../pages/auth/Register';
 
 
 // Components
@@ -27,6 +28,7 @@ Test
 
 export const routes = {
 	login: '/login',
+	register: '/register',
 	home: '/',
 };
 
@@ -47,6 +49,11 @@ const Routes: FC = () => {
 							layout={AuthLayout}
 							path={routes.login}
 							renderComponent={Login}
+						/>
+						<Route
+							layout={AuthLayout}
+							path={routes.register}
+							renderComponent={Register}
 						/>
 					</Switch>
 				</AnimatePresence>

@@ -24,6 +24,7 @@ const authSlice = createSlice({
 		postLoading: toggleLoading<LoginState>(),
 		postFailed: toggleFailed<LoginState>(),
 		postSuccess: toggleSuccess<LoginState>(),
+		reset: (): LoginState => initialState,
 	},
 });
 
@@ -33,6 +34,7 @@ export const {
 	postLoading,
 	postSuccess,
 	postFailed,
+	reset,
 } = authSlice.actions;
 
 

@@ -21,6 +21,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 		left: '50%',
 		margin: '-12px 0 0 -12px',
 	},
+	link: {
+		display: 'block',
+		paddingTop: theme.spacing(1),
+		float: 'right',
+	},
 }));
 
 export default useStyles;

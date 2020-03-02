@@ -25,6 +25,7 @@ const authSlice = createSlice({
 		postLoading: toggleLoading<RegisterState>(),
 		postFailed: toggleFailed<RegisterState>(),
 		postSuccess: toggleSuccess<RegisterState>(),
+		reset: (): RegisterState => initialState,
 	},
 });
 
@@ -34,6 +35,7 @@ export const {
 	postLoading,
 	postSuccess,
 	postFailed,
+	reset,
 } = authSlice.actions;
 
 

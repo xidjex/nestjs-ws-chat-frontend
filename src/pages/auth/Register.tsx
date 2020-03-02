@@ -3,17 +3,17 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink } from 'react-router-dom';
 
-import Link from '@material-ui/core/Link';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
+import Link from '@material-ui/core/Link';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 // Actions
-import { login, reset as resetState } from '../../redux/auth/login/loginSlice';
+import { register as registerAction, reset as resetState } from '../../redux/auth/register/registerSlice';
 
 // Routes
 import { routes } from '../../routes/Routes';
@@ -25,15 +25,17 @@ import { Form } from './styles';
 import useStyles from './useStyles';
 
 // Validation Schema
-import { LoginSchema } from './loginSchema';
+import { RegisterSchema } from './registerSchema';
 
 // Types
-import { LoginState } from '../../redux/auth/login/types';
+import { RegisterState } from '../../redux/auth/register/types';
 import { RootState } from '../../redux/rootReducer';
 
 interface FormData {
 	password: string;
+	passwordConfirmation: string;
 	email: string;
+	name: string;
 }
 
 const Login: FC = () => {
@@ -42,7 +44,7 @@ const Login: FC = () => {
 		error,
 		loading,
 		validationErrors = [],
-	} = useSelector<RootState>(({ auth }) => auth.login) as LoginState;
+	} = useSelector<RootState>(({ auth }) => auth.register) as RegisterState;
 
 	const dispatch = useDispatch();
 
@@ -54,13 +56,15 @@ const Login: FC = () => {
 		errors,
 	} = useForm<FormData>({
 		mode: 'onSubmit',
-		validationSchema: LoginSchema,
+		validationSchema: RegisterSchema,
 	});
 
 	const styles = useStyles();
 
 	const onSubmit = handleSubmit((data) => {
-		dispatch(login(data));
+		const { email, password, name } = data;
+
+		dispatch(registerAction({ email, password, name }));
 	});
 
 	// Effects
@@ -81,7 +85,7 @@ const Login: FC = () => {
 				<LockOutlinedIcon />
 			</Avatar>
 			<Typography component="h1" variant="h5">
-					Sign in
+					Register
 			</Typography>
 			<TextField
 				autoComplete="email"
@@ -94,6 +98,20 @@ const Login: FC = () => {
 				label="Email Address"
 				margin="normal"
 				name="email"
+				required
+				variant="outlined"
+			/>
+			<TextField
+				autoComplete="name"
+				autoFocus
+				error={!!errors.name}
+				fullWidth
+				helperText={errors?.name?.message}
+				id="name"
+				inputRef={register}
+				label="Name"
+				margin="normal"
+				name="name"
 				required
 				variant="outlined"
 			/>
@@ -111,6 +129,20 @@ const Login: FC = () => {
 				type="password"
 				variant="outlined"
 			/>
+			<TextField
+				autoComplete="current-password"
+				error={!!errors.passwordConfirmation}
+				fullWidth
+				helperText={errors?.passwordConfirmation?.message}
+				id="passwordConfirmation"
+				inputRef={register}
+				label="Password Confirmation"
+				margin="normal"
+				name="passwordConfirmation"
+				required
+				type="password"
+				variant="outlined"
+			/>
 			<div className={styles.wrapper}>
 				<Button
 					color="primary"
@@ -119,15 +151,16 @@ const Login: FC = () => {
 					type="submit"
 					variant="contained"
 				>
-					Sign In
+					Register
 				</Button>
 				<Typography variant="subtitle1">
 					<Link
 						className={styles.link}
 						component={RouterLink}
-						to={routes.register}
+						to={routes.login}
 					>
-						Register
+						{/* eslint-disable-next-line react/no-unescaped-entities */}
+						I'm already have an account
 					</Link>
 				</Typography>
 				{loading && <CircularProgress size={24} className={styles.buttonProgress} />}
