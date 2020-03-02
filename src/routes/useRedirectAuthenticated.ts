@@ -9,7 +9,10 @@ import { checkToken } from '../redux/users/current/currentSlice';
 import { UserState } from '../redux/users/current/types';
 import { RootState } from '../redux/rootReducer';
 
-const useRedirectAuthenticated = (path = '/'): void => {
+// Constants
+import { routes } from './Routes';
+
+const useRedirectAuthenticated = (path = routes.home): void => {
 	const {
 		data: { authorized },
 	} = useSelector<RootState>(({ users }) => users.current) as UserState;

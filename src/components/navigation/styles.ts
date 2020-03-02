@@ -8,7 +8,6 @@ const NavigationWrapper = styled(motion.div)`
   
   height: 100%;
   width: 100%;
-  max-width: 400px;
   
   background-color: #FFF;
   box-shadow: 5px 0 10px rgba(0, 0, 0, .2);

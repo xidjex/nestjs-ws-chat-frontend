@@ -1,15 +1,22 @@
-import { AnimatePresence } from 'framer-motion';
 import React, { FC, ReactElement } from 'react';
-import { Switch, Route as DefaultRoute, Link } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import {
+	Switch,
+	Route as DefaultRoute,
+	Link,
+} from 'react-router-dom';
 
 // Pages
-import AuthLayout from '../layouts/auth/AuthLayout';
 import Login from '../pages/auth/Login';
-import PrivateRoute from './PrivateRoute';
+
 
 // Components
-import useRedirectAuthenticated from './useRedirectAuthenticated';
 import Route from './Route';
+import PrivateRoute from './PrivateRoute';
+import AuthLayout from '../layouts/auth/AuthLayout';
+
+// Utils
+import useRedirectAuthenticated from './useRedirectAuthenticated';
 
 const Test: FC = () => (
 	<div>

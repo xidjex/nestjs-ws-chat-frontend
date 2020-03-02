@@ -8,18 +8,18 @@ import Navigation from '../../components/navigation/Navigation';
 // Navigation
 import {
 	AuthLayout as AuthLayoutWrapper,
-	SidebarContainer,
+	NavigationContainer,
 } from './styles';
 
 import { LayoutProps } from '../types';
 
 const AuthLayout: FC<LayoutProps> = ({ children }: LayoutProps) => (
 	<AuthLayoutWrapper background={background}>
-		<SidebarContainer>
+		<NavigationContainer>
 			<Navigation>
 				{children}
 			</Navigation>
-		</SidebarContainer>
+		</NavigationContainer>
 		<div />
 	</AuthLayoutWrapper>
 );
