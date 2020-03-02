@@ -4,8 +4,12 @@ export type TargetType = {
     [key: string]: string;
 }
 
-export type ValidationErrorType = {
-    constraints: any;
+export interface ConstraintsType {
+    [key: string]: string;
+}
+
+export type ApiValidationErrorMessage = {
+    constraints: ConstraintsType;
     target: TargetType;
     property: string;
 }
@@ -22,8 +26,10 @@ export interface SuccessRequestAction {
     payload: any;
 }
 
-export interface ValidationErrors {
-    [key: string]: string;
+export interface ApiValidationError {
+    name: string;
+    type: string;
+    message: string;
 }
 
 export interface ReduxAction<T> extends Action<string> {
@@ -32,6 +38,6 @@ export interface ReduxAction<T> extends Action<string> {
 
 export interface DefaultState {
     data: any;
-    validationErrors: ValidationErrors;
     loading?: boolean;
+    validationErrors?: ApiValidationError[] | undefined;
 }

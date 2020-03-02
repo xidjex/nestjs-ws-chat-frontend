@@ -1,9 +1,8 @@
-import { DefaultState, ReduxAction, ValidationErrors } from '../../types';
+import { DefaultState, ReduxAction } from '../../types';
 
 export interface RegisterState extends DefaultState {
     error: string | null;
     loading: boolean;
-    validationErrors: ValidationErrors;
 }
 
 export type RegisterActionPayload = {

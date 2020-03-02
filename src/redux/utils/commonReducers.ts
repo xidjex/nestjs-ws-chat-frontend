@@ -1,8 +1,8 @@
 import {
 	FailedRequestAction,
 	SuccessRequestAction,
-	ValidationErrors,
-	ValidationErrorType,
+	ApiValidationError,
+	ApiValidationErrorMessage,
 	DefaultState,
 } from '../types';
 
@@ -16,17 +16,22 @@ export function toggleLoading<State>() {
 }
 
 export function toggleFailed<State>() {
-	return (state: State, action: FailedRequestAction<Array<ValidationErrorType>>): State => {
+	return (state: State, action: FailedRequestAction<ApiValidationErrorMessage[]>): State => {
 		if (action.payload.statusCode === 400) {
-			// eslint-disable-next-line max-len
-			const validationErrors = action.payload.message.reduce((acc: ValidationErrors, error: ValidationErrorType) => ({
+			const validationErrors = action.payload.message.reduce((
+				acc: ApiValidationError[],
+				error: ApiValidationErrorMessage,
+			) => [
 				...acc,
-				[error.property]: Object.values(error.constraints).join(),
-			}), {});
+				{
+					name: error.property,
+					type: 'submission',
+					message: Object.values(error.constraints).join(),
+				},
+			], []);
 
 			return {
 				...state,
-				error: action.payload.error,
 				loading: false,
 				validationErrors,
 			};
@@ -49,7 +54,6 @@ export function toggleSuccess<State extends DefaultState>() {
 			...action.payload,
 		},
 		error: null,
-		validationErrors: {},
 		loading: false,
 	});
 }

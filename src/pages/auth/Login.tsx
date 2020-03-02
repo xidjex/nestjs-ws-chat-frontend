@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,6 +19,9 @@ import Form from './styles';
 // Styles
 import useStyles from './useStyles';
 
+// Validation Schema
+import { LoginSchema } from './loginSchema';
+
 // Types
 import { LoginState } from '../../redux/auth/login/types';
 import { RootState } from '../../redux/rootReducer';
@@ -33,13 +36,20 @@ const Login: FC = () => {
 	const {
 		error,
 		loading,
+		validationErrors = [],
 	} = useSelector<RootState>(({ auth }) => auth.login) as LoginState;
 
 	const dispatch = useDispatch();
 
 	// Form data
-	const { register, handleSubmit } = useForm<FormData>({
+	const {
+		register,
+		setError,
+		handleSubmit,
+		errors,
+	} = useForm<FormData>({
 		mode: 'onSubmit',
+		validationSchema: LoginSchema,
 	});
 
 	const styles = useStyles();
@@ -47,6 +57,13 @@ const Login: FC = () => {
 	const onSubmit = handleSubmit((data) => {
 		dispatch(login(data));
 	});
+
+	// Effects
+	useEffect(() => {
+		if (validationErrors.length) {
+			setError(validationErrors);
+		}
+	}, [setError, validationErrors]);
 
 	return (
 		<Form onSubmit={onSubmit}>
@@ -57,36 +74,40 @@ const Login: FC = () => {
 				Sign in
 			</Typography>
 			<TextField
-				variant="outlined"
-				margin="normal"
-				required
-				fullWidth
-				id="email"
-				label="Email Address"
-				name="email"
 				autoComplete="email"
 				autoFocus
+				error={!!errors.email}
+				fullWidth
+				helperText={errors?.email?.message}
+				id="email"
 				inputRef={register}
+				label="Email Address"
+				margin="normal"
+				name="email"
+				required
+				variant="outlined"
 			/>
 			<TextField
-				variant="outlined"
-				margin="normal"
-				required
-				fullWidth
-				name="password"
-				label="Password"
-				type="password"
-				id="password"
 				autoComplete="current-password"
+				error={!!errors.password}
+				fullWidth
+				helperText={errors?.password?.message}
+				id="password"
 				inputRef={register}
+				label="Password"
+				margin="normal"
+				name="password"
+				required
+				type="password"
+				variant="outlined"
 			/>
 			<div className={styles.wrapper}>
 				<Button
-					type="submit"
-					fullWidth
-					disabled={loading}
-					variant="contained"
 					color="primary"
+					disabled={loading}
+					fullWidth
+					type="submit"
+					variant="contained"
 				>
 					Sign In
 				</Button>

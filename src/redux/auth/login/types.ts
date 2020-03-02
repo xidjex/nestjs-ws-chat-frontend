@@ -1,13 +1,11 @@
 import {
 	DefaultState,
 	ReduxAction,
-	ValidationErrors,
 } from '../../types';
 
 export interface LoginState extends DefaultState {
     error: string | null;
     loading: boolean;
-    validationErrors: ValidationErrors;
 }
 
 export type LoginActionPayload = {
