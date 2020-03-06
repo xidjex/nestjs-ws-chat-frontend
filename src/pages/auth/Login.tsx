@@ -71,7 +71,7 @@ const Login: FC = () => {
 	}, [setError, validationErrors]);
 
 	// Component unmount
-	useEffect(() => () => {
+	useEffect(() => (): void => {
 		dispatch(resetState());
 	}, [dispatch]);
 

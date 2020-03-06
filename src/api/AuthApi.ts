@@ -15,6 +15,11 @@ class AuthApi extends BaseApi {
 		data: { email, password },
 	});
 
+	logout = (): Promise<AxiosResponse> => this.request({
+		type: RequestType.post,
+		url: 'logout',
+	});
+
 	register = (
 		email: string,
 		password: string,

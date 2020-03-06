@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 import { ReduxAction } from '../../types';
 
 // Types
@@ -66,6 +66,8 @@ export const currentSlice = createSlice({
 		[String(successRegister)]: setUserReducer,
 	},
 });
+
+export const logout = createAction(`${currentSlice.name}/logout`);
 
 export const {
 	refreshTokens,

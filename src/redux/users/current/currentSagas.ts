@@ -8,7 +8,10 @@ import {
 } from 'redux-saga/effects';
 
 // Api
-import AuthApi, { RefreshTokenData, CheckTokenData } from '../../../api/AuthApi';
+import AuthApi, {
+	RefreshTokenData,
+	CheckTokenData,
+} from '../../../api/AuthApi';
 
 // Actions
 import { postSuccess as successLogin } from '../../auth/login/loginSlice';
@@ -20,6 +23,7 @@ import {
 	postFailed,
 	setAuthorized,
 	successCheckToken,
+	logout as logoutAction,
 } from './currentSlice';
 
 // Types
@@ -73,7 +77,28 @@ function* checkToken(): Generator {
 
 		yield runRefreshTokenTask(accessToken);
 	} catch (error) {
+		if (error.response.status === 403) {
+			yield put(setAuthorized(false));
+
+			return;
+		}
+
 		yield refreshTokens();
+	}
+}
+
+function* logout(): Generator {
+	try {
+		yield call(AuthApi.logout);
+
+		yield put(setAuthorized(false));
+
+		localStorage.removeItem('jwt');
+		localStorage.removeItem('refreshToken');
+	} catch (error) {
+		const { data } = error.response;
+
+		yield put(postFailed(data));
 	}
 }
 
@@ -84,5 +109,6 @@ export default function* watchTokens(): Generator {
 		takeLatest(successRefreshToken, manageTokens),
 		takeLatest(refreshTokensAction, refreshTokens),
 		takeLatest(checkTokenAction, checkToken),
+		takeLatest(logoutAction, logout),
 	]);
 }

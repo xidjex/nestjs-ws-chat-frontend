@@ -25,16 +25,17 @@ const NavigationContainer = styled.div`
 		flex-grow: 1;
 `;
 
-const CurrentUserCard = styled.div`
+const UserCard = styled.div`
 		width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 20px;
+    min-height: 150px;
+    background-color: blue;
 `;
 
 export {
 	AppLayout,
-	CurrentUserCard,
+	UserCard,
 	NavigationContainer,
 };

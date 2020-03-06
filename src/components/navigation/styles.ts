@@ -4,7 +4,8 @@ import { motion } from 'framer-motion';
 const NavigationWrapper = styled(motion.div)`
 	display: flex;
 	align-items: flex-start;
-	justify-content: center;
+	justify-content: flex-start;
+	flex-direction: column;
   
   height: 100%;
   width: 100%;
@@ -13,6 +14,7 @@ const NavigationWrapper = styled(motion.div)`
   box-shadow: 5px 0 10px rgba(0, 0, 0, .2);
   
   box-sizing: border-box;
+  overflow-y: auto;
 `;
 
 const motionOptions = {

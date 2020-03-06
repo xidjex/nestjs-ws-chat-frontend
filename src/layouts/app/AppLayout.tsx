@@ -1,30 +1,40 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
-/* eslint-disable */
 
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import LockIcon from '@material-ui/icons/Lock';
+import ExitIcon from '@material-ui/icons/ExitToApp';
+import IconButton from '@material-ui/core/IconButton';
 import AdminIcon from '@material-ui/icons/SupervisedUserCircle';
+import Tooltip from '@material-ui/core/Tooltip';
 
 // Background image
 import background from '../../assets/background.jpg';
 
 // Components
-import { Content, Navigation } from '../../components';
-import { RootState } from '../../redux/rootReducer';
-import { UserState } from '../../redux/users/current/types';
+import {
+	Content,
+	Navigation,
+	UserStatusIcon,
+} from '../../components';
+
+// Utils
+import useLogout from '../../utils/useLogout';
 
 // Styles
 import {
 	AppLayout as AppLayoutWrapper,
 	NavigationContainer,
-	CurrentUserCard,
 } from './styles';
 
 // Types
 import { LayoutProps } from '../types';
 import useStyles from './useStyles';
+import { UserState } from '../../redux/users/current/types';
+import { RootState } from '../../redux/rootReducer';
+import UsersList from '../../components/users-list/UsersList';
+
+// Utils
 import getGravatar from '../../utils/getGravatar';
 
 const AppLayout: FC<LayoutProps> = ({ children }: LayoutProps) => {
@@ -34,27 +44,46 @@ const AppLayout: FC<LayoutProps> = ({ children }: LayoutProps) => {
 			isAdmin,
 			status,
 			email,
-		}
+		},
 	} = useSelector<RootState>(({ users: { current } }) => current) as UserState;
-	
-	console.log(getGravatar(email));
-	
+
+	const handleLogout = useLogout();
+
 	const styles = useStyles();
 	return (
 		<AppLayoutWrapper background={background}>
 			<NavigationContainer>
 				<Navigation>
-					<CurrentUserCard>
+					<div className={styles.userCard}>
 						<Avatar
 							alt={name.toUpperCase()}
 							src={getGravatar(email)}
 							className={styles.avatarLarge}
 						/>
-						<Typography variant="h6" className={styles.userName}>
-							{isAdmin && <AdminIcon color="primary" /> }
+						<Typography variant="subtitle1" className={styles.userName}>
 							{name}
+							<div className={styles.userBadges}>
+								<UserStatusIcon status={status} />
+								{isAdmin
+									&& (
+										<Tooltip title="Admin" aria-label="admin">
+											<AdminIcon />
+										</Tooltip>
+									)}
+								<Tooltip title="Logout" aria-label="logout">
+									<IconButton
+										aria-label="logout"
+										size="small"
+										style={{ color: 'white' }}
+										onClick={handleLogout}
+									>
+										<ExitIcon />
+									</IconButton>
+								</Tooltip>
+							</div>
 						</Typography>
-					</CurrentUserCard>
+					</div>
+					<UsersList />
 				</Navigation>
 			</NavigationContainer>
 			<Content>
