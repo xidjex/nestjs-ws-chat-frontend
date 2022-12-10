@@ -19,7 +19,7 @@
     "@types/styled-components": "^4.4.2",
     "axios": "^0.19.1",
     "browser-history": "^1.0.1",
-    "qs": "^6.9.1",
+    "qs": "^6.9.7",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-hook-form": "^4.5.5",
